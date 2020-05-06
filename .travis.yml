@@ -31,7 +31,6 @@ after_success:
       for f in packages/*; do
         if [ -d $f ]; then
           echo $f;
-          cat $f/coverage/lcov.info | sed "s/^SF:/SF:packages\/$f/g" > $f/coverage/lcov.info;
           /tmp/cc-test-reporter format-coverage -d -t lcov -o coverage/coverage.${f//\//-}.json $f/coverage/lcov.info;
         fi
       done;
