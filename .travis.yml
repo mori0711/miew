@@ -24,6 +24,8 @@ before_script:
 script:
   - lerna run ci
 after_success:
+  - cat packages/app/coverage/lcov.info | sed "s/^SF:/SF:packages\/app/g" > packages/app/coverage/lcov.info;
+  - cat packages/lib/coverage/lcov.info | sed "s/^SF:/SF:packages\/lib/g" > packages/lib/coverage/lcov.info;
   - sonar-scanner
   - lerna run coveralls
   # See https://github.com/codeclimate/test-reporter/issues/263
